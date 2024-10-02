@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
@@ -18,7 +19,7 @@ type BoardProps = {
 
 const taskStatus = ['To Do', 'Work In Progress', 'Under Review', 'Completed'];
 
-const BoardView = ({ id, setIsModalNewTaskOpen }: BoardProps) => {
+const Board = ({ id, setIsModalNewTaskOpen }: BoardProps) => {
   const {
     data: tasks,
     isLoading,
@@ -142,7 +143,7 @@ const Task = ({ task }: TaskProps) => {
   const formattedDueDate = task.dueDate
     ? format(new Date(task.dueDate), 'P')
     : '';
-  const numComments = (task.comments && task.comments.length) || 0;
+  const numComments = task.comments?.length || 0;
 
   const PriorityTag = ({ priority }: { priority: TaskType['priority'] }) => (
     <div
@@ -251,4 +252,4 @@ const Task = ({ task }: TaskProps) => {
   );
 };
 
-export default BoardView;
+export default Board;
